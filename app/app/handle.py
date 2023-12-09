@@ -18,6 +18,13 @@ BUFFER_SIZE = 3145728
 
 
 
+def option__menu():
+    print("Please select Menu: \n")
+    print("1. To send emails\n")
+    print("2. To view a list of received emails\n")
+    print("3. Exit\n")
+
+
 def send_to_server(sock: socket, s: str) :
     if sock is None :
         print(s)
@@ -26,10 +33,3 @@ def send_to_server(sock: socket, s: str) :
             sock.sendall(bytes(s + "\n", FORMAT))
         except :
             raise ConnectionError
-
-
-
-
-
-
-
