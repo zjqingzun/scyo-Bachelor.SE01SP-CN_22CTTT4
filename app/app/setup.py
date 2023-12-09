@@ -114,6 +114,8 @@ try :
         # (yet)
         msg = "STAT"
         handle.send_to_server(client, msg)
+        msg = "QUIT"
+        handle.send_to_server(client, msg)
         break
            
     # menu (yet)
@@ -155,7 +157,11 @@ try :
             
             flag_file = int(input("Are files attached? (1. yes, 2. no): "))
             if flag_file == 1 :
-                count_file = int(input("Number of files you want to send (no more than 10 files): "))
+                while True :
+                    count_file = int(input("Number of files you want to send (no more than 10 files): "))
+                    if count_file > 0 and count_file <= 10 :
+                        break
+                    print("Error: is not within the allowable limit.")
                 for i in count_file :
                     sub = input("Specify the ith file path ", i, ": ")
                     limit_file.append(sub)
@@ -163,6 +169,9 @@ try :
             
             
             # send data to server (yet)
+            # initialize id (yet)
+            mess_id = "202312302053-uiwciew3498ncw834t"
+            
             # from (yet)
             msg = "EHLO [10.0.140.42]"
             handle.send_to_server(client, msg)
@@ -181,7 +190,7 @@ try :
             # text (yet)
             msg = "DATA"
             handle.send_to_server(client, msg)
-            msg = "Message-ID: "
+            msg = "Message-ID: " + mess_id
             handle.send_to_server(client, msg)
             msg = "User-Agent: " + VERSION
             handle.send_to_server(client,msg)
@@ -209,18 +218,54 @@ try :
             handle.send_to_server(client, msg)
             msg = "Subject: " + subject
             handle.send_to_server(client, msg)
-            msg = "Content: " 
-            handle.send_to_server(client, msg)
-            msg = "\n"
-            handle.send_to_server(client, msg)
-            msg = content
-            handle.send_to_server(client, msg)
-            msg = "\n"
-            handle.send_to_server(client, msg)
-            msg = "."
+            
+            # content
+            msg = "Content: " + str(count_file)
             handle.send_to_server(client, msg)
             
+            if flag_file == 1 :
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = "--text--"
+                handle.send_to_server(client, msg)
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = content
+                handle.send_to_server(client, msg)
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = "----" + mess_id
+                handle.send_to_server(client, msg)
+                
+                # file (yet)
+                for i in count_file :
+                    msg = "\n"
+                    handle.send_to_server(client, msg)
+                    msg = "--file--" + str(i)
+                    handle.send_to_server(client, msg)
+                    msg = "\n"
+                    handle.send_to_server(client, msg)
+                    
+                    # send file (yet)
+                
+                
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = "."
+                handle.send_to_server(client, msg)
+            else :
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = content
+                handle.send_to_server(client, msg)
+                msg = "\n"
+                handle.send_to_server(client, msg)
+                msg = "."
+                handle.send_to_server(client, msg)
+            
             # Confirm email (perfect)
+            msg = "QUIT"
+            handle.send_to_server(client, msg)
             print("Email sent successfully !")
             
             # Test not data
@@ -230,13 +275,18 @@ try :
             #     break 
         elif option == "2" :
             #config
-            client.close()
             client.connect(server_recv)
             
             
             
             # connect the transmission line
-            msg = "LIST"
+            msg = "CAPA"
+            handle.send_to_server(client, msg)
+            msg = "USER " + account
+            handle.send_to_server(client, msg)
+            msg = "PASS " + password
+            handle.send_to_server(client, msg)
+            msg = "LIST" 
             handle.send_to_server(client, msg)
             msg = "UIDL"
             handle.send_to_server(client, msg)
@@ -261,6 +311,14 @@ try :
             if index_mail == 0:
                 continue
             # elif index_mail > 0 and index_mail <= sub :    
+            
+            
+            
+            
+            
+            
+            
+            
                 
         elif option == "3" :
             option = "0"
