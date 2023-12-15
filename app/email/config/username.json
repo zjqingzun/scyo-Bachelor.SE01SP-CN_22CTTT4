@@ -1,0 +1,5 @@
+{
+  "smtp": {"server": "10.0.140.42", "port": 2500, "username": "admin@control.com", "password": "admin"},
+  "pop3": {"server": "10.0.140.42", "port": 1100, "username": "admin@control.com", "password": "admin"}
+}
+

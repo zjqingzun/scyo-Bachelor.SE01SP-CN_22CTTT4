@@ -1,0 +1,1 @@
+{ "host": "10.0.140.42", "smtp" : 2500, "pop3" : 1100, "username" : "admin@control.com", "password" : "admin", "autoload" : 300}

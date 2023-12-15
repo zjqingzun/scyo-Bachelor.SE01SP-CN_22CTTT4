@@ -1,0 +1,94 @@
+import time
+
+
+import socket
+import base64
+
+
+
+def send_to_server(sock: socket, s: str) :
+    if sock is None :
+        print(s)
+    else :
+        try :
+            sock.sendall(bytes(s + "\n", 'utf-8'))
+        except :
+            raise ConnectionError
+
+def get_receive_data(sock) :
+    data = b""
+    while True :
+        chunk = sock.recv(1024)
+        if not chunk :
+            break
+        data += chunk
+        if b"\r\n" in data :
+            break
+        
+    data = base64.b64encode(data).decode('utf-8')
+    return data
+
+def get_amount_mail(sock) :
+    data = b""
+    while True :
+        chunk = sock.recv(1024)
+        if not chunk :
+            break
+        data += chunk
+        if b"\r\n" in data :
+            break
+    data = data.decode("utf-8")
+    sub = data.split("\r\n")[-3]
+    count = int(sub.split()[0])    
+    return count
+
+def decode_file_and_write(__path, __data) :
+    decoded_data = base64.b64decode(__data)
+    with open(__path, 'wb') as file:
+        file.write(decoded_data)
+    # print(f"The data has been written to the file at path {__path}.")
+
+username = "admin@control.com"
+password = "admin"
+
+
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("10.0.140.42", 1100))
+data = ""
+path = ""
+msg = ""
+time.sleep(0.01)
+
+msg = "USER " + username
+send_to_server(client, msg)
+time.sleep(0.01)
+
+msg = "PASS " + password
+send_to_server(client, msg)
+time.sleep(0.01)
+
+msg = "LIST"
+send_to_server(client, msg)
+time.sleep(0.01)
+
+# count
+count = get_amount_mail(client)
+print(count, "\n\n")
+
+# path
+path = "./app/email/_resource/"
+
+# Loop
+for i in range(1, count + 1) :
+    send_to_server(client, f"RETR {i}")
+    email_data = get_receive_data(client)
+    decode_file_and_write(path + f"cache_file_{i}.txt", email_data)
+    time.sleep(0.5)
+
+print("\nRun successfully !\n")
+
+
+client.close()
+
+

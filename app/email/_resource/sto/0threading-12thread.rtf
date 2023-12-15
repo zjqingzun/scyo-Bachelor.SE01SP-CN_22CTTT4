@@ -1,0 +1,27 @@
+import threading
+import time
+
+def user_input_program():
+    while True:
+        user_input = input("Nhập một số (để dừng nhập, nhập 'stop'): ")
+        if user_input.lower() == 'stop':
+            break
+
+def hello_program():
+    while True:
+        print("Hello")
+        time.sleep(5)
+
+# Tạo hai luồng
+user_input_thread = threading.Thread(target=user_input_program)
+hello_thread = threading.Thread(target=hello_program)
+
+# Bắt đầu chạy các luồng
+user_input_thread.start()
+hello_thread.start()
+
+# Đợi cho đến khi luồng nhập từ người dùng kết thúc
+user_input_thread.join()
+
+# Khi luồng nhập từ người dùng kết thúc, thông báo cho luồng "Hello" dừng lại
+hello_thread.join()

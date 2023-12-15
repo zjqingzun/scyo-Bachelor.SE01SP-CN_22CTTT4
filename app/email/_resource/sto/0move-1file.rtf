@@ -1,0 +1,18 @@
+import shutil
+
+def move_data(source_path, destination_path):
+    try:
+        # Chuyển dữ liệu từ nguồn đến đích
+        shutil.move(source_path, destination_path)
+        print(f"Chuyển dữ liệu từ {source_path} đến {destination_path} thành công.")
+    except FileNotFoundError:
+        print("Lỗi: Nguồn không tồn tại.")
+    except PermissionError:
+        print("Lỗi: Không có quyền truy cập để thực hiện chuyển đổi.")
+
+# Đường dẫn nguồn và đường dẫn đích
+source_path = "E:\\_programFile__file\\aa\\data__application_desktop.xlsx"
+destination_path = "E:\\_programFile__file\\bb"
+
+# Gọi hàm để chuyển dữ liệu
+move_data(source_path, destination_path)
