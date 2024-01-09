@@ -1,0 +1,9 @@
+{
+    "important" : ["urgent", "ASAP", "elect", "update", "UPDATE", "Update", "share", "notice"],
+
+    "work" : ["report", "meeting", "job", "jobs", "no-reply", "do-not-reply", "sharing", "document", "folder", "file"],
+
+    "spam" : ["hack", "Hack", "virus", "Virus", "crack", "Crack", "spam", "Spam", "fuck", "Fuck", "qc", "Qc", 
+    "no-subject", "free trial", "prize", "Prize", "risk-free", "Risk-free", "miracle", "Miracle", "buy", "Buy",
+    "ad", "Ad", "bonus", "Bonus", "cash", "Cash", "offer", "Offer", "Test", "test"]
+}
