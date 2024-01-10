@@ -1,0 +1,12 @@
+FIRST TEST 
+
+Time: Friday, December 22 2023, 02:59:02, UTC+0700
+
+To: admin@control.com,
+Content: 
+
+    Send file 
+
+
+
+./app/email/appcache/download/username.json

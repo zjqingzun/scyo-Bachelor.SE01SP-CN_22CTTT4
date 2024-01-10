@@ -1,0 +1,42 @@
+
+SE01SP
+----app
+    ----email
+        ----_resource
+            ----handle
+                ----data
+                    ----.rtf
+                    ----.txt
+            ----sto
+                ----.rtf
+            ----.py
+            ----.txt
+            ----.webp
+        ----appcache
+            ----cache
+                ----.txt
+            ----download
+                ----.none
+        ----config
+            ----.json
+        ----data
+            ----box
+                ----inbox
+                    ----.txt
+                ----spam
+                    ----.txt
+        ----package
+            ----1.0
+                ----__pycache__
+                    ----.pyc
+                ----.py
+        ----plugins
+            ----.md
+            ----.txt
+        ----update
+            ----.json
+        ----.rtf
+        ----.md
+    ----server
+----ins
+----manual
